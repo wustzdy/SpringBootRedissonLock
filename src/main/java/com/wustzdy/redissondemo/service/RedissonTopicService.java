@@ -26,7 +26,7 @@ public class RedissonTopicService implements ApplicationRunner, Ordered {
     private RedissonClient redissonClient;
     private static String position;
     private static ScheduledExecutorService scheduledExecutorService;
-    private static int LOCK_RELEASE_TIME = 10;
+    private static int LOCK_RELEASE_TIME = 60;
     private static int PERIOD_TIME = 30;
     private boolean flag;
     @Autowired
