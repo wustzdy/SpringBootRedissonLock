@@ -39,7 +39,10 @@ public class LockTest2 {
                     throw new RuntimeException("aquire lock fail");
                 } finally {
                     System.out.println("线程" + Thread.currentThread().getId() + "释放锁：" + System.currentTimeMillis());
-//                    rLock.forceUnlock();
+//                    System.out.print("是否还持有锁：" + rLock.isLocked());
+                    /*if (rLock.isLocked()) {
+                        rLock.forceUnlock();
+                    }*/
                 }
             });
         }
