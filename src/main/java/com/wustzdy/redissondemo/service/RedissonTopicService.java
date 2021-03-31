@@ -71,7 +71,7 @@ public class RedissonTopicService implements ApplicationRunner, Ordered {
     private void campaign() {
         RLock rLock = redissonClient.getLock("listen_event_test");
         try {
-            boolean lockStatus = rLock.tryLock(-1, LOCK_RELEASE_TIME, TimeUnit.SECONDS);
+            boolean lockStatus = rLock.tryLock((long) 30, (long) 60, TimeUnit.SECONDS);
             if (lockStatus) {
                 System.out.println("上锁" + lockStatus);
             } else {
@@ -81,6 +81,8 @@ public class RedissonTopicService implements ApplicationRunner, Ordered {
         } catch (InterruptedException e) {
             log.error("campaign error", e);
             throw new RuntimeException(e);
+        } finally {
+            rLock.unlock();
         }
 
     }
